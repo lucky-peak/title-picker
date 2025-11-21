@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "name": "Title Picker",
+  "version": "0.0.1",
+  "description": "Select page elements as tab title",
+  "permissions": ["scripting", "activeTab", "storage", "contextMenus"],
+  "action": {
+    "default_title": "Select Title"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "commands": {
+    "activate-selector": {
+      "suggested_key": {
+        "default": "Alt+T"
+      },
+      "description": "Enable title selection mode"
+    },
+    "set-title-input": {
+      "suggested_key": {
+        "default": "Alt+Shift+T"
+      },
+      "description": "Open input modal to set tab title"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["restore.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
