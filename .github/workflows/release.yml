@@ -1,0 +1,54 @@
+name: Release on tag
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Prepare version
+        id: vars
+        run: |
+          echo "version=${GITHUB_REF_NAME}" >> $GITHUB_OUTPUT
+
+      - name: Pack extension to zip
+        id: pack
+        run: |
+          set -e
+          VERSION="${{ steps.vars.outputs.version }}"
+          FILENAME="title-picker-${VERSION}.zip"
+          STAGING="__pkg"
+          rm -rf "$STAGING"
+          mkdir -p "$STAGING"
+          if [ ! -f manifest.json ]; then
+            echo "manifest.json not found" >&2
+            exit 1
+          fi
+          cp manifest.json "$STAGING/"
+          [ -d src ] && cp -R src "$STAGING/src"
+          [ -d assets ] && cp -R assets "$STAGING/assets"
+          [ -d styles ] && cp -R styles "$STAGING/styles"
+          cd "$STAGING"
+          zip -r "../$FILENAME" .
+          echo "artifact=$FILENAME" >> $GITHUB_OUTPUT
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: Release ${{ github.ref_name }}
+          body: |
+            Automated release for ${{ github.ref_name }}.
+            Contains packaged extension zip ready for distribution.
+          draft: false
+          prerelease: false
+          files: |
+            ${{ steps.pack.outputs.artifact }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
