@@ -27,9 +27,7 @@
   overlay.style.inset = "0";
   overlay.style.background = "rgba(0,0,0,0.35)";
   overlay.style.zIndex = "2147483646";
-  overlay.style.display = "flex";
-  overlay.style.alignItems = "center";
-  overlay.style.justifyContent = "center";
+  overlay.style.display = "block";
 
   const modal = document.createElement("div");
   modal.className = "__title_picker_input_modal__";
@@ -40,6 +38,10 @@
   modal.style.maxWidth = "80vw";
   modal.style.padding = "16px";
   modal.style.fontFamily = "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif";
+  modal.style.position = "fixed";
+  modal.style.top = "50vh";
+  modal.style.left = "50vw";
+  modal.style.transform = "translate(-50%, -50%)";
 
   const title = document.createElement("div");
   title.textContent = t.title;

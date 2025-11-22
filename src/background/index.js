@@ -13,7 +13,7 @@ chrome.action.onClicked.addListener((tab) => {
         return;
     }
     chrome.scripting
-        .executeScript({ target: { tabId: tab.id }, files: ["content.js"] })
+        .executeScript({ target: { tabId: tab.id }, files: ["src/content/selector.js"] })
         .catch((err) => console.warn("ExecuteScript failed", err));
 });
 
