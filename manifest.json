@@ -8,7 +8,7 @@
     "default_title": "Select Title"
   },
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "src/background/index.js"
   },
   "commands": {
     "activate-selector": {
@@ -27,7 +27,7 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["restore.js"],
+      "js": ["src/content/restore.js"],
       "run_at": "document_idle"
     }
   ]

@@ -24,7 +24,7 @@ chrome.commands.onCommand.addListener((cmd) => {
             const t = tabs && tabs[0];
             if (!t || !t.id || !t.url || !canInject(t.url)) return;
             chrome.scripting
-                .executeScript({ target: { tabId: t.id }, files: ["content.js"] })
+                .executeScript({ target: { tabId: t.id }, files: ["src/content/selector.js"] })
                 .catch((err) => console.warn("ExecuteScript failed", err));
         });
     } else if (cmd === "set-title-input") {
@@ -32,7 +32,7 @@ chrome.commands.onCommand.addListener((cmd) => {
             const t = tabs && tabs[0];
             if (!t || !t.id || !t.url || !canInject(t.url)) return;
             chrome.scripting
-                .executeScript({ target: { tabId: t.id }, files: ["input.js"] })
+                .executeScript({ target: { tabId: t.id }, files: ["src/content/ui.js"] })
                 .catch((err) => console.warn("ExecuteScript failed", err));
         });
     }

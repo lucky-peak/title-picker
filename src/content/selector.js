@@ -55,13 +55,6 @@
         }
     }
 
-    // restore last title
-    chrome.storage.local.get(location.href, (res) => {
-        if (res[location.href]) {
-            document.title = res[location.href];
-        }
-    });
-
     // start selection mode
     activatePicker();
 })();
