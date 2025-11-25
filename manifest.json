@@ -3,9 +3,10 @@
   "name": "Title Picker",
   "version": "0.0.1",
   "description": "Select page elements as tab title",
-  "permissions": ["scripting", "activeTab", "storage", "contextMenus"],
+  "permissions": ["scripting", "activeTab", "storage"],
   "action": {
-    "default_title": "Select Title"
+    "default_title": "Title Picker",
+    "default_popup": "src/popup/popup.html"
   },
   "background": {
     "service_worker": "src/background/index.js"
