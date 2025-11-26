@@ -1,8 +1,15 @@
 .container{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif;padding:10px 12px;min-width:240px;background:#fff;border:1px solid #d0d7de;border-radius:0;box-shadow:0 8px 24px rgba(31,35,40,0.08)}
 .title{font-size:14px;margin:0 0 8px 0;color:#24292f}
-.row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-top:1px solid #eef2f7}
+.row{display:flex;align-items:center;justify-content:space-between;padding:8px 0}
 .row-text{font-size:13px;color:#1f2328}
 .hint{margin-top:6px;color:#57606a;font-size:12px}
+.group{margin-top:8px;border-top:1px solid #eef2f7}
+.actions{margin-top:0;display:block}
+.btn{appearance:none;border:1px solid #d0d7de;background:#f6f8fa;color:#24292f;border-radius:0;padding:6px 10px;font-size:12px;cursor:pointer;width:100%;display:flex;align-items:center;justify-content:space-between}
+.btn-primary{border-color:#1f883d;background:#2da44e;color:#fff}
+.btn:active{transform:translateY(0.5px)}
+.btn-text{text-align:left}
+.kbd{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;border:1px solid rgba(31,35,40,0.15);background:#fff;color:#24292f;padding:2px 6px;font-size:11px;line-height:1;border-radius:0}
 .switch{position:relative;display:inline-block;width:40px;height:22px}
 .switch input{opacity:0;width:0;height:0}
 .slider{position:absolute;cursor:pointer;top:0;left:0;right:0;bottom:0;background:#d0d7de;transition:all .2s;border-radius:22px}

@@ -9,12 +9,22 @@
   <body>
     <div class="container">
       <h1 class="title" id="title">Title Picker</h1>
-      <div class="row">
-        <div class="row-text" id="label-text">Auto Restore This URL</div>
-        <label class="switch">
-          <input type="checkbox" id="toggle" />
-          <span class="slider"></span>
-        </label>
+      <div class="group">
+        <div class="actions">
+          <button class="btn btn-primary" id="btn-pick">
+            <span class="btn-text" id="btn-pick-text">Pick Element as Title</span>
+            <span class="kbd">Alt+T</span>
+          </button>
+        </div>
+      </div>
+      <div class="group">
+        <div class="row">
+          <div class="row-text" id="label-text">Auto Restore This URL</div>
+          <label class="switch">
+            <input type="checkbox" id="toggle" />
+            <span class="slider"></span>
+          </label>
+        </div>
       </div>
       <div class="hint" id="hint"></div>
     </div>
