@@ -41,6 +41,16 @@
         const text = e.target.innerText.trim();
         if (text) {
             chrome.storage.local.set({ [location.href]: text });
+            try {
+                chrome.storage.local.get(["autoRestorePrefixes"], (res) => {
+                    const pl = Array.isArray(res.autoRestorePrefixes) ? res.autoRestorePrefixes : [];
+                    const href = location.href;
+                    const matches = pl.filter(p => typeof p === "string" && href.startsWith(p));
+                    matches.sort((a,b)=> b.length - a.length);
+                    const longest = matches[0];
+                    if (longest) chrome.storage.local.set({ [longest]: text });
+                });
+            } catch (_) {}
             document.title = text;
         }
 

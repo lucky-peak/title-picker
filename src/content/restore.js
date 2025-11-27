@@ -10,18 +10,34 @@
   const apply = () => {
     try {
       const href = location.href;
-      chrome.storage.local.get(["autoRestoreUrls", href], (res) => {
-        const list = Array.isArray(res.autoRestoreUrls) ? res.autoRestoreUrls : [];
-        const exactOn = list.includes(href);
+      chrome.storage.local.get(["autoRestoreUrls","autoRestorePrefixes","autoRestorePrefixDisabledUrls", href], (res) => {
+        const ul = Array.isArray(res.autoRestoreUrls) ? res.autoRestoreUrls : [];
+        const pl = Array.isArray(res.autoRestorePrefixes) ? res.autoRestorePrefixes : [];
+        const dl = Array.isArray(res.autoRestorePrefixDisabledUrls) ? res.autoRestorePrefixDisabledUrls : [];
+        const exactOn = ul.includes(href);
         const exactSaved = res[href];
         if (exactOn && typeof exactSaved === "string" && exactSaved.trim()) {
           enabled = true;
           expected = exactSaved;
           setTitle(exactSaved);
-        } else {
-          enabled = false;
-          expected = null;
+          return;
         }
+        if (dl.includes(href)) { enabled = false; expected = null; return; }
+        const matches = pl.filter(p => typeof p === "string" && href.startsWith(p));
+        matches.sort((a,b)=> b.length - a.length);
+        const longest = matches[0];
+        if (!longest) { enabled = false; expected = null; return; }
+        chrome.storage.local.get(longest, (r2) => {
+          const prefixSaved = r2[longest];
+          if (typeof prefixSaved === "string" && prefixSaved.trim()) {
+            enabled = true;
+            expected = prefixSaved;
+            setTitle(prefixSaved);
+          } else {
+            enabled = false;
+            expected = null;
+          }
+        });
       });
     } catch (_) {}
   };
